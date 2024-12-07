@@ -1,0 +1,54 @@
+﻿<div class="row">
+    <div class="col-1 d-flex justify-content-center">
+        <div id="mySidenav" class="sidenav">
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action" asp-area="" 
+                    asp-controller="MemberForm" asp-action="Index">
+                    Member
+                </a>
+                <a class="list-group-item list-group-item-action" asp-area=""
+                    asp-controller="TrainerForm" asp-action="Index">
+                    Trainer
+                </a>
+                <a class="list-group-item list-group-item-action" asp-area=""
+                   asp-controller="ClassForm" asp-action="Index">
+                    Class & Schedule
+                </a>
+                <a class="list-group-item list-group-item-action" asp-area=""
+                   asp-controller="WorkoutForm" asp-action="Index">
+                    Workout Plan
+                </a>
+                <a class="list-group-item list-group-item-action" asp-area=""
+                   asp-controller="MembershipForm" asp-action="Index">
+                    Membership Subscription
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Navbar-->
+<nav class="navbar navbar-light bg-light" style="box-shadow: 0px 0px 8px #888888;">
+    <!-- Collapse button -->
+    <button class="navbar-toggler hamburger-button" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" onclick="Nav()" style="z-index: 2">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+    <!-- Navbar brand -->
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#"></a>
+    </div>
+</nav>
+<!--/.Navbar-->
+
+<script>
+    function Nav() {
+        var width = document.getElementById("mySidenav").style.width;
+        if (width === "0px" || width == "") {
+            document.getElementById("mySidenav").style.width = "250px";
+            $('.animated-icon').toggleClass('open');
+        }
+        else {
+            document.getElementById("mySidenav").style.width = "0px";
+            $('.animated-icon').toggleClass('open');
+        }
+    }
+</script>

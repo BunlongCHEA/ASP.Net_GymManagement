@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Gym_ManagementSystem.Models.MemberViewModel>
+
+@{
+    ViewData["Title"] = "All Member List";
+}
+
+<h1>Member List</h1>
+
+<div>
+    <p style="float: right">
+        <a asp-action="Create" class="btn btn-primary">
+            New Member
+        </a>
+    </p>
+</div>
+
+@if(Model == null || !Model.Any())
+{
+    <div style="margin-top: 70px;" class="alert alert-warning" role="alert">
+        No Member List Available
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <th>Member ID</th>
+            <th>Member Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Join Date</th>
+            <th>Action</th>
+        </thead>
+
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Id</td>
+                <td>@m.MemberName</td>
+                <td>@m.Contact</td>
+                <td>@m.Email</td>
+                <td>@m.JoinedMembershipDate</td>
+                
+                <td>
+                    <a asp-action="Edit"
+                            asp-route-id="@m.Id"
+                            type="button" class="btn btn-primary">
+                            Edit
+                    </a>
+                    <a asp-action="Delete"
+                            asp-route-id="@m.Id"
+                            type="button" class="btn btn-danger">
+                            Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+}

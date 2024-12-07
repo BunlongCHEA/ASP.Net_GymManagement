@@ -1,0 +1,182 @@
+/* _content/Gym_ManagementSystem/Views/Shared/Navbar.cshtml.rz.scp.css */
+.sidenav[b-57jjmuccqy] {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f8f9fa !important;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 0px 0px 8px #888888;
+}
+
+    .sidenav a[b-57jjmuccqy] {
+        padding: 8px 8px 8px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+        .sidenav a:hover[b-57jjmuccqy] {
+            color: #f1f1f1;
+        }
+
+    .sidenav[b-57jjmuccqy]::-webkit-scrollbar {
+        display: none;
+    }
+
+
+.animated-icon[b-57jjmuccqy] {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    margin: 0px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+}
+
+    .animated-icon span[b-57jjmuccqy] {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        border-radius: 9px;
+        opacity: 1;
+        left: 0;
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transition: .25s ease-in-out;
+        -moz-transition: .25s ease-in-out;
+        -o-transition: .25s ease-in-out;
+        transition: .25s ease-in-out;
+    }
+
+    .animated-icon span[b-57jjmuccqy] {
+        background: #f3e5f5;
+    }
+
+        .animated-icon span:nth-child(1)[b-57jjmuccqy] {
+            top: 0px;
+            -webkit-transform-origin: left center;
+            -moz-transform-origin: left center;
+            -o-transform-origin: left center;
+            transform-origin: left center;
+        }
+
+        .animated-icon span:nth-child(2)[b-57jjmuccqy] {
+            top: 10px;
+            -webkit-transform-origin: left center;
+            -moz-transform-origin: left center;
+            -o-transform-origin: left center;
+            transform-origin: left center;
+        }
+
+        .animated-icon span:nth-child(3)[b-57jjmuccqy] {
+            top: 20px;
+            -webkit-transform-origin: left center;
+            -moz-transform-origin: left center;
+            -o-transform-origin: left center;
+            transform-origin: left center;
+        }
+
+    .animated-icon.open span:nth-child(1)[b-57jjmuccqy] {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+        top: 0px;
+        left: 8px;
+    }
+
+    .animated-icon.open span:nth-child(2)[b-57jjmuccqy] {
+        width: 0%;
+        opacity: 0;
+    }
+
+    .animated-icon.open span:nth-child(3)[b-57jjmuccqy] {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        top: 21px;
+        left: 8px;
+    }
+
+button[b-57jjmuccqy] {
+    border: none !important;
+}
+
+    button:focus[b-57jjmuccqy] {
+        outline: none;
+    }
+
+.center[b-57jjmuccqy] {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    text-align: center;
+    vertical-align: middle;
+}
+/* _content/Gym_ManagementSystem/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-czea0mkf77] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-czea0mkf77] {
+  color: #0077cc;
+}
+
+.btn-primary[b-czea0mkf77] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-czea0mkf77], .nav-pills .show > .nav-link[b-czea0mkf77] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-czea0mkf77] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-czea0mkf77] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-czea0mkf77] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-czea0mkf77] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-czea0mkf77] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

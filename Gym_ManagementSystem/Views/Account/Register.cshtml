@@ -1,0 +1,158 @@
+﻿@model RegisterViewModel
+
+<section class="text-center text-lg-start">
+    <style>
+        .cascading-right {
+            margin-right: -50px;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background-color: lightblue;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+    </style>
+
+    <!-- Jumbotron -->
+    <div class="container py-4">
+        <div class="row g-0 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card cascading-right bg-body-tertiary" style="backdrop-filter: blur(30px);">
+                    <div class="card-body p-5 shadow-5 text-center">
+                        <h2 class="fw-bold mb-5">Sign up now</h2>
+                        <form asp-action="Register" method="POST">
+                            <!-- 3 column grid layout with text inputs for the first name, last name, and gender -->
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div data-mdb-input-init class="form-outline">
+                                        <label class="form-label" for="form3Example1">First name</label>
+                                        <input asp-for="FirstName" type="text" id="form3Example1" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div data-mdb-input-init class="form-outline">
+                                        <label class="form-label" for="form3Example2">Last name</label>
+                                        <input asp-for="LastName" type="text" id="form3Example2" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="genderDropdown">Gender</label>
+                                        <select asp-for="Gender" id="genderDropdown" class="form-select" onchange="showGenderOptions(this)">
+                                            <option value="" selected disabled>Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        @* <input asp-for="Gender" type="text" id="selectedGender" class="form-control mt-2" style="display:none;" /> *@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email input -->
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example4">Email address</label>
+                                <input asp-for="Email" type="email" id="form3Example4" class="form-control" />
+                            </div>
+
+                            <!-- Password input -->
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example5">Password</label>
+                                <input asp-for="Password" type="password" id="form3Example5" class="form-control" />
+                            </div>
+
+                            <!-- Confirm Password input -->
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example6">Confirm Password</label>
+                                <input asp-for="ConfirmPassword" type="password" id="form3Example6" class="form-control" />
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+                                Register
+                            </button>
+
+                            <!-- Cancel button-->
+                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4"
+                                    asp-area="" asp-controller="Account" asp-action="Login">
+                                Cancel
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <img src="~/css/Reg-background.png" class="w-100 rounded-4 shadow-4"
+                     alt="" />
+            </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+</section>
+
+<script>
+    function showGenderOptions(select) {
+        var selectedValue = select.options[select.selectedIndex].value;
+        var genderInput = document.getElementById('selectedGender');
+        if (selectedValue) {
+            genderInput.value = selectedValue;
+            genderInput.style.display = 'block';
+        } else {
+            genderInput.style.display = 'none';
+        }
+    }
+</script>
+
+
+
+@* <h2>Create Your Admin Account</h2>
+<form asp-action="Register" method="POST">
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control"/>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gender"></label>
+        <input asp-for="Gender" class="form-control" />
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <input type="submit" value="Register" class="btn btn-primary" 
+           style="padding:10px; margin-top:10px"/>
+</form> *@

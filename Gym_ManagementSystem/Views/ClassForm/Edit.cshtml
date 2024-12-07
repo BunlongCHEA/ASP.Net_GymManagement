@@ -1,0 +1,81 @@
+﻿@model Gym_ManagementSystem.Models.ClassViewModel
+
+@{
+    ViewData["Title"] = "Edit Class And Schedule";
+}
+
+<h2>Edit Class And Schedule</h2>
+
+<form asp-action="Edit" method="POST">
+    <!-- Hidden field for Id -->
+    <input asp-for="Id" type="hidden" />
+    <div class="form-group">
+        <label asp-for="ClassName" class="control-label"></label>
+        <input asp-for="ClassName" class="form-control">
+        <span asp-validation-for="ClassName" class="text-danger"></span>
+    </div>
+    <hr />
+    <h4>Class Schedules</h4>
+    <p>We have reset class schedules for @Model.ClassName, please select datetime available for class</p>
+    <div id="schedule-container">
+        @* @for (int i = 0; i < Model.ClassSchedules.Count(); i++)
+        { *@
+            @* // Check if OpenDate is not the default value (0001-01-01)
+            if (Model.ClassSchedules[i].OpenDate != new DateOnly(1, 1, 1))
+            { *@
+                <div class="schedule-row">
+                    <input asp-for="ClassSchedules[0].Id" type="hidden" />
+                    <input asp-for="ClassSchedules[0].ClassId" type="hidden" />
+
+                    <div class="form-group">
+                        <label>Open Time</label>
+                        <!-- Allow binding of multiple input to a list of ClassScheduleViewModel in ClassViewModel -->
+                        <!-- Index[0] is the first entry input, and Javascript will increment index more when add more input -->
+                        <input type="time" name="ClassSchedules[0].OpenTime" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>End Time</label>
+                        <input type="time" name="ClassSchedules[0].EndTime" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Open Date</label>
+                        <input type="date" name="ClassSchedules[0].OpenDate" class="form-control" />
+                    </div>
+                </div>
+            @* } *@
+        @* } *@
+    </div>
+
+    <div class="form-group" style="margin-top:10px">
+        <button type="button" class="btn btn-success" onclick="addSchedule()">Add More Schedule</button>
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+@section ClassScript {
+    <script type="text/javascript">
+        let scheduleCount = 1;
+        function addSchedule()
+        {
+            const container = document.getElementById('schedule-container');
+            const newSchedule = document.createElement('div');
+            newSchedule.classList.add('schedule-row');
+            newSchedule.innerHTML = 
+                `<div class="form-group">
+                    <label>Open Time</label>
+                    <input type="time" name="classSchedules[${scheduleCount}].OpenTime" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>End Time</label>
+                    <input type="time" name="classSchedules[${scheduleCount}].EndTime" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Open Date</label>
+                    <input type="date" name="classSchedules[${scheduleCount}].OpenDate" class="form-control" />
+                </div>`;
+            container.appendChild(newSchedule);
+            scheduleCount++;
+        }
+    </script>
+}

@@ -1,0 +1,33 @@
+﻿@model Gym_ManagementSystem.Models.TrainerViewModel
+
+@{
+    ViewData["Title"] = "Edit Trainer";
+}
+
+<h2>Edit Trainer</h2>
+
+<form asp-action="Edit" method="POST">
+    <!-- Hidden field for MemberId -->
+    <input asp-for="Id" type="hidden" />
+    <div class="form-group">
+        <label asp-for="TrainerName" class="control-label"></label>
+        <input asp-for="TrainerName" class="form-control">
+        <span asp-validation-for="TrainerName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TrainerContact" class="control-label"></label>
+        <input asp-for="TrainerContact" class="form-control">
+        <span asp-validation-for="TrainerContact" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TrainerEmail" class="control-label"></label>
+        <input asp-for="TrainerEmail" class="form-control">
+        <span asp-validation-for="TrainerEmail" class="text-danger"></span>
+    </div>
+
+    <div class="form-group" style="margin-top:10px">
+        <input type="submit" value="Save" class="btn btn-primary">
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+

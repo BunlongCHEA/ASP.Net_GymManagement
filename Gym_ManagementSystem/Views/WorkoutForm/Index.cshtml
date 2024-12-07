@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Gym_ManagementSystem.Models.WorkoutViewModel>
+
+@{
+    ViewData["Title"] = "Workouts";
+}
+
+<h1>Workout Arrangement</h1>
+
+<div>
+    <p style="float: right">
+        <a asp-action="Create" class="btn btn-primary">
+            Create New Workout
+        </a>
+    </p>
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div style="margin-top: 70px;" class="alert alert-warning" role="alert">
+        No Class List Available
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Class</th>
+                <th>Trainer</th>
+                <th>Member</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Class.ClassName</td>
+                    <td>@item.Trainer.TrainerName</td>
+                    <td>@item.Member.MemberName</td>
+                    <td>
+                        <a asp-action="Details"
+                           asp-route-id="@item.Id"
+                           type="button" class="btn btn-info">
+                            Details
+                        </a>
+                        <a asp-action="Edit" 
+                           asp-route-id="@item.Id"
+                           type="button" class="btn btn-primary">
+                           Edit
+                       </a>
+                        <a asp-action="Delete" 
+                           asp-route-id="@item.Id"
+                           type="button" class="btn btn-danger">
+                           Delete
+                       </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

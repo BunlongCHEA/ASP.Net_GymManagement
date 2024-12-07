@@ -1,0 +1,68 @@
+﻿@model Gym_ManagementSystem.Models.ClassViewModel
+
+@{
+    ViewData["Title"] = "Create Class And Schedule";
+}
+
+<h2>Create Class And Schedule</h2>
+
+<form asp-action="Create" method="POST">
+    <div class="form-group">
+        <label asp-for="ClassName" class="control-label"></label>
+        <input asp-for="ClassName" class="form-control">
+        <span asp-validation-for="ClassName" class="text-danger"></span>
+    </div>
+
+    <h4>Class Schedules</h4>
+    <div id="schedule-container">
+        <div class="schedule-row">
+            <div class="form-group">
+                <label>Open Time</label>
+                <!-- Allow binding of multiple input to a list of ClassScheduleViewModel in ClassViewModel -->
+                <!-- Index[0] is the first entry input, and Javascript will increment index more when add more input -->
+                <input type="time" name="ClassSchedules[0].OpenTime" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>End Time</label>
+                <input type="time" name="ClassSchedules[0].EndTime" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Open Date</label>
+                <input type="date" name="ClassSchedules[0].OpenDate" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" style="margin-top:10px">
+        <button type="button" onclick="addSchedule()" class="btn btn-info">Add More Schedule</button>
+        <input type="submit" value="Create" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+@section ClassScript {
+    <script type="text/javascript">
+        let scheduleCount = 1;
+        function addSchedule()
+        {
+            const container = document.getElementById('schedule-container');
+            const newSchedule = document.createElement('div');
+            newSchedule.classList.add('schedule-row');
+            newSchedule.innerHTML = 
+                `<div class="form-group">
+                    <label>Open Time</label>
+                    <input type="time" name="classSchedules[${scheduleCount}].OpenTime" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>End Time</label>
+                    <input type="time" name="classSchedules[${scheduleCount}].EndTime" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Open Date</label>
+                    <input type="date" name="classSchedules[${scheduleCount}].OpenDate" class="form-control" />
+                </div>`;
+            container.appendChild(newSchedule);
+            scheduleCount++;
+        }
+    </script>
+}

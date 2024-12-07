@@ -1,0 +1,41 @@
+﻿@model Gym_ManagementSystem.Models.MembershipViewModel
+
+@{
+    ViewData["Title"] = "Delete Membership";
+}
+
+<h2>Delete Workout</h2>
+
+<h3>Are you sure you want to delete this Membership?</h3>
+
+<div>
+    <hr />
+    <table class="table">
+        <thead>
+            <th>Member Name</th>
+            <th>Month Subscription(M)</th>
+            <th>Amount Per Month($)</th>
+            <th>Discount(%)</th>
+            <th>Total Price($)</th>
+            <th>Renewal Date</th>
+            <th>Expired Date</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Member.MemberName</td>
+                <td>@Model.SubscribedMonth</td>
+                <td>@Model.Amount</td>
+                <td>@Model.DiscountPercentage</td>
+                <td>@Model.TotalPrice</td>
+                <td>@Model.RenewalDate</td>
+                <td>@Model.ExpiredDate</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form asp-action="DeleteConfirm" style="margin-top:10px">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

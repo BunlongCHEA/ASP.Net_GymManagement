@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TrainerViewModel>
+
+@{
+    ViewData["Title"] = "All Trainer List";
+}
+
+<h1>Trainer List</h1>
+
+<div>
+    <p style="float: right">
+        <a asp-action="Create" class="btn btn-primary">
+            New Trainer
+        </a>
+    </p>
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div style="margin-top: 70px;" class="alert alert-warning" role="alert">
+        No Trainer List Available
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <th>Trainer ID</th>
+        <th>Trainer Name</th>
+        <th>Trainer Contact</th>
+        <th>Trainer Email</th>
+        <th>Action</th>
+        </thead>
+
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Id</td>
+                <td>@m.TrainerName</td>
+                <td>@m.TrainerContact</td>
+                <td>@m.TrainerEmail</td>
+
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@m.Id"
+                       type="button" class="btn btn-primary">
+                        Edit
+                    </a>
+                    <a asp-action="Delete"
+                       asp-route-id="@m.Id"
+                       type="button" class="btn btn-danger">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+}

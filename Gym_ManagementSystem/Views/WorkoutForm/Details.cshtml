@@ -1,0 +1,48 @@
+﻿@model Gym_ManagementSystem.Models.WorkoutViewModel
+
+@{
+    ViewData["Title"] = "Workout Details";
+}
+
+<h2>Workout Details</h2>
+
+<div>
+    <h4>Workout Id: @Model.Id</h4>
+    <h4>Class: @Model.Class.ClassName</h4>
+    <h4>Member: @Model.Member.MemberName</h4>
+    <h4>Trainer: @Model.Trainer.TrainerName</h4>
+</div>
+
+<h3>Class Schedules</h3>
+
+@if (Model.Class.ClassSchedules != null && Model.Class.ClassSchedules.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Open Date</th>
+                <th>Open Time</th>
+                <th>End Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var schedule in Model.Class.ClassSchedules)
+            {
+                <tr>
+                    <td>@schedule.OpenDate.ToString("yyyy-MM-dd")</td>
+                    <td>@schedule.OpenTime.ToString("HH:mm")</td>
+                    <td>@schedule.EndTime.ToString("HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No schedules available for this class.</p>
+}
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

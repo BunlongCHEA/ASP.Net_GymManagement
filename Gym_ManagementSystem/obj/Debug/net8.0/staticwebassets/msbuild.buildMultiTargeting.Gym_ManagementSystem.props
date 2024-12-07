@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Gym_ManagementSystem.props" />
+</Project>

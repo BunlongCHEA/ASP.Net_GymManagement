@@ -1,0 +1,48 @@
+﻿@model Gym_ManagementSystem.Models.ClassViewModel
+
+@{
+    ViewData["Title"] = "Delete Class";
+}
+
+<h2>Delete Class</h2>
+
+<h3>Are you sure you want to delete this class and all its schedules?</h3>
+
+<div>
+    <h4>Class Details</h4>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Class Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClassName)
+        </dd>
+    </dl>
+
+    <h4>Class Schedules</h4>
+    <div>
+        <table class="table">
+            <thead>
+                <th>Open Date</th>
+                <th>Open Time</th>
+                <th>End Time</th>
+            </thead>
+            <tbody>
+                <tr>
+                    @foreach(var schedule in Model.ClassSchedules)
+                    {
+                        <td>@schedule.OpenDate.ToString("yyyy-MM-dd")</td>
+                        <td>@schedule.OpenTime</td>
+                        <td>@schedule.EndTime</td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+
+        <form asp-action="DeleteConfirm" style="margin-top:10px">
+            <input type="hidden" asp-for="Id">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

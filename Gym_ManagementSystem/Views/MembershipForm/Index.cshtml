@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Gym_ManagementSystem.Models.MembershipViewModel>
+
+@{
+    ViewData["Title"] = "Membership";
+}
+
+<h1>Membership Register</h1>
+
+<div>
+    <p style="float: right">
+        <a asp-action="Create" class="btn btn-primary">
+            Create Membership
+        </a>
+    </p>
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div style="margin-top: 70px;" class="alert alert-warning" role="alert">
+        No Membership List Available
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Member Name</th>
+                <th>Month Subscription(M)</th>
+                <th>Amount Per Month($)</th>
+                <th>Discount(%)</th>
+                <th>Total Price($)</th>
+                <th>Renewal Date</th>
+                <th>Expired Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Member.MemberName</td>
+                    <td>@item.SubscribedMonth</td>
+                    <td>@item.Amount</td>
+                    <td>@item.DiscountPercentage</td>
+                    <td>@item.TotalPrice</td>
+                    <td>@item.RenewalDate</td>
+                    <td>@item.ExpiredDate</td>
+                    <td>
+                        <a asp-action="Edit"
+                           asp-route-id="@item.Id"
+                           type="button" class="btn btn-primary">
+                            Edit
+                        </a>
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           type="button" class="btn btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

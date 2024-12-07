@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gym Management System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Gym_ManagementSystem.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- Include Navbar from Management folder if user is authenticated -->
+    @if (User.Identity.IsAuthenticated && !IsLoginOrRegisterPage())
+    {
+        @* <div class="nav-item">
+            <form method="POST"
+                  class="nav-link"
+                  asp-controller="Account"
+                  asp-action="Logout">
+
+                <button type="submit" class="btn btn-primary">
+                    Logout
+                </button>
+            </form>
+        </div> *@
+        <nav class="navbar navbar-light bg-light d-flex justify-content-between" style="box-shadow: 0px 0px 8px #888888;">
+            <!-- Hamburger: Collapse button -->
+            <div class="d-flex">
+                <partial name="~/Views/Shared/Navbar.cshtml" />
+            </div>
+
+            <!-- Navbar brand or empty space -->
+            <div class="mx-auto order-0">
+                <a class="navbar-brand mx-auto" href="#"></a>
+            </div>
+
+            <!-- Logout button -->
+            <div>
+                <form method="POST" class="nav-link p-0 m-0" asp-controller="Account" asp-action="Logout">
+                    <button type="submit" class="btn btn-primary">Logout</button>
+                </form>
+            </div>
+        </nav>
+    }
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- This will render the "ClassScript" section in Create.cshtml from Classes -->
+    @RenderSection("ClassScript", required:false)
+
+    <script>
+        @functions {
+            // Helper function to determine if the current page is Login or Register
+            public bool IsLoginOrRegisterPage()
+            {
+                // Get the name of the current controller from the routing data
+                var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+                // Get the name of the current action (method) from the routing data
+                var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+                // Return true if the current controller is "Account" and the action is either "Login" or "Register"
+                return (currentController == "Account" &&
+                (currentAction == "Login" || currentAction == "Register"));
+            }
+        }
+
+    </script>
+</body>
+</html>

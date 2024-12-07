@@ -1,0 +1,34 @@
+﻿@model Gym_ManagementSystem.Models.WorkoutViewModel
+
+@{
+    ViewData["Title"] = "Create Workout";
+}
+
+<h2>Create Workout</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="ClassId" class="control-label">Class Name</label>
+        <!-- ViewBag.ClassId, receive data from controller and display ClassName to user,
+        and send ClassId back to controller for storing database when selected -->
+        <select asp-for="ClassId" class="form-control" asp-items="ViewBag.ClassId"></select>
+        <span asp-validation-for="ClassId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TrainerId" class="control-label">Trainer Name</label>
+        <select asp-for="TrainerId" class="form-control" asp-items="ViewBag.TrainerId"></select>
+        <span asp-validation-for="TrainerId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MemberId" class="control-label">Member Name</label>
+        <select asp-for="MemberId" class="form-control" asp-items="ViewBag.MemberId"></select>
+        <span asp-validation-for="MemberId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group" style="margin-top:10px">
+        <input type="submit" value="Create" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

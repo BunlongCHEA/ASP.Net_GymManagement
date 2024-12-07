@@ -1,0 +1,80 @@
+﻿@model Gym_ManagementSystem.Models.MembershipViewModel
+
+@{
+    ViewData["Title"] = "Create Membership";
+}
+
+<h2>Create Membership</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="MemberId" class="control-label">Member Name</label>
+        <!-- ViewBag.Members, receive data from controller and display MemberName to user,
+        and send MemberId back to controller for storing database when selected -->
+        <select asp-for="MemberId" class="form-control"
+                asp-items="ViewBag.Members"></select>
+        <span asp-validation-for="MemberId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SubscribedMonth" class="control-label">Month Subscription(Month)</label>
+        <input asp-for="SubscribedMonth" class="form-control" id="subscribedMonth">
+        <span asp-validation-for="SubscribedMonth" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Amount" class="control-label">Amount Per Month($)</label>
+        <input asp-for="Amount" class="form-control" type="number" id="amount">
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiscountPercentage" class="control-label">Discount(%)</label>
+        <input asp-for="DiscountPercentage" class="form-control" type="number" id="discountPercentage">
+        <span asp-validation-for="DiscountPercentage" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TotalPrice" class="control-label">Total Price($)</label>
+        <input asp-for="TotalPrice" class="form-control" type="number" id="totalPrice" readonly>
+        <span asp-validation-for="TotalPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RenewalDate" class="control-label">Renewal Date</label>
+        <input asp-for="RenewalDate" class="form-control" type="date" id="renewalDate">
+        <span asp-validation-for="RenewalDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ExpiredDate" class="control-label">Expired Date</label>
+        <input asp-for="ExpiredDate" class="form-control" type="text" id="expiredDate" readonly>
+        <span asp-validation-for="ExpiredDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group" style="margin-top:10px">
+        <input type="submit" value="Create" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+<script>
+    document.addEventListener('input', function () {
+        var subscribedMonth = parseFloat(document.getElementById('subscribedMonth').value) || 0;
+        var amount = parseFloat(document.getElementById('amount').value) || 0;
+        var discountPercentage = parseFloat(document.getElementById('discountPercentage').value) || 0;
+
+        var totalPrice = (amount * subscribedMonth) - ((amount * subscribedMonth) * (discountPercentage / 100));
+
+        document.getElementById('totalPrice').value = totalPrice.toFixed(2);
+    });
+
+    document.addEventListener('input', function () {
+        var subscribedMonth = parseInt(document.getElementById('subscribedMonth').value) || 0;
+        var renewalDate = new Date(document.getElementById('renewalDate').value)
+
+        if (!isNaN(renewalDate.getTime()) && subscribedMonth > 0)
+        {
+            var expiredD = new Date(renewalDate.setMonth(renewalDate.getMonth() + subscribedMonth));
+            document.getElementById('expiredDate').value = expiredD.toISOString().split('T')[0];
+        }
+        else
+        {
+            document.getElementById('expiredDate').value = '';
+        }
+    });
+</script>
