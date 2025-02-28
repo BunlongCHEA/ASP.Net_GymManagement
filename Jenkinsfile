@@ -15,13 +15,7 @@ pipeline{
         SQL_PASSWORD = 't01UA<2%7~v4'
         DB_CONNECTION_STRING = 'Server=db;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v4;TrustServerCertificate=True;'
     }
-    stages{
-        stage('Checkout and Clone Code') {
-            steps {
-                // git branch: "${params.BRANCH}", url: 'https://github.com/BunlongCHEA/ASP.Net_GymManagement.git'
-            }
-        }
-        
+    stages{        
         stage('Modify Docker-Compose for Database Credential') {
             steps {
                 script {
