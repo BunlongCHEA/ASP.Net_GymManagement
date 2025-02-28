@@ -32,8 +32,10 @@ services:
     container_name: nginx_proxy
     ports:
       - "80:80"
+      - "443:443"  # Add HTTPS support
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
     depends_on:
       - app
     restart: always
