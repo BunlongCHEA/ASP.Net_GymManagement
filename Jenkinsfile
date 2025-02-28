@@ -10,10 +10,9 @@ pipeline{
     environment {
         PROJECT_NAME = 'Gym_ManagementSystem'
         NGINX_CONTAINER = 'nginx_proxy'
-        NGINX_DORMAIN = 'yourdormain.com'
-        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
-        SQL_PASSWORD = 't01UA<2%7~v4'
-        DB_CONNECTION_STRING = 'Server=db;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v4;TrustServerCertificate=True;'
+        DOCKER_COMPOSE_FILE = 'docker-compose.yaml'
+        SQL_PASSWORD = 't01UA<2%7~v45'
+        DB_CONNECTION_STRING = 'Server=db;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v45;TrustServerCertificate=True;'
     }
     stages{        
         stage('Modify Docker-Compose for Database Credential') {
@@ -41,7 +40,6 @@ pipeline{
                     echo 'Configuring docker-compose.yaml for located certs path for HTTPS...'
                     sed -i 's|./certs|${params.CERTIFICATE_PATH}/g' ${DOCKER_COMPOSE_FILE}
                     echo 'Configuring Nginx for HTTPS...'
-                    sed -i 's|yourdomain.com|${NGINX_DORMAIN}|g' ${NGINX_CONTAINER}
                     sed -i 's|server.crt|${params.CERTIFICATE_NAME}/g' ${NGINX_CONTAINER}
                     sed -i 's|server.key|${params.CERTIFICATE_KEY_NAME}/g' ${NGINX_CONTAINER}
                     """
