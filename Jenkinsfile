@@ -26,39 +26,10 @@ pipeline{
             }
         }
 
-        stage('Handle HTTPS Configuration') {
-            when {
-                expression { params.USE_HTTPS }
-            }
-            steps {
-                script {
-                    if (!params.CERTIFICATE_PATH) {
-                        error "HTTPS is enabled but no certificate paths were provided!"
-                    }
-
-                    sh """
-                    echo 'Configuring docker-compose.yaml for located certs path for HTTPS...'
-                    sed -i 's|./certs|${params.CERTIFICATE_PATH}/g' ${DOCKER_COMPOSE_FILE}
-                    echo 'Configuring Nginx for HTTPS...'
-                    sed -i 's|server.crt|${params.CERTIFICATE_NAME}/g' ${NGINX_CONTAINER}
-                    sed -i 's|server.key|${params.CERTIFICATE_KEY_NAME}/g' ${NGINX_CONTAINER}
-                    """
-                }
-            }
-        }
-
         stage("Build and Start Containers") {
             steps {
                 script {
                     sh 'docker-compose up -d'
-
-                    sh """
-                    echo 'Waiting for SQL Server to be ready...'
-                    until nc -z sqlserver 1433; do
-                        sleep 2
-                    done
-                    echo "SQL Server is ready!"
-                    """
                 }
             }
         }
