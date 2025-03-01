@@ -11,7 +11,7 @@ pipeline{
         PROJECT_NAME = 'Gym_ManagementSystem'
         NGINX_CONTAINER = 'nginx_proxy'
         DOCKER_COMPOSE_FILE = 'docker-compose.yaml'
-        APPSETTING_FILE = './workspace/ASP DotNet Core/Gym/Gym_ManagementSystem/appsettings.json'
+        APPSETTING_FILE = './Gym_ManagementSystem/appsettings.json'
         SQL_PASSWORD = 't01UA<2%7~v45'
         DB_CONNECTION_STRING = 'Server=db;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v45;TrustServerCertificate=True;'
         DOTNET_ROOT = "/usr/lib/dotnet"
@@ -30,7 +30,7 @@ pipeline{
                     sed -i 's|Server=db;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v4;TrustServerCertificate=True;|${DB_CONNECTION_STRING}|g' ${DOCKER_COMPOSE_FILE}
 
                     sed -i 's|Server=localhost;Database=GymManagementSystem;User Id=sa;Password=12345;TrustServerCertificate=True;Integrated security=False;MultipleActiveResultSets=true;Encrypt=False;|${DB_CONNECTION_STRING}|g' "${APPSETTING_FILE}"
-                    
+
                     echo '***After config ${DOCKER_COMPOSE_FILE}...'
                     cat ${DOCKER_COMPOSE_FILE}
                     """
