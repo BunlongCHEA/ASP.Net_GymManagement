@@ -42,12 +42,12 @@ pipeline{
             steps {
                 script {
                     sh """
-                    echo 'export PATH="$HOME/.dotnet/tools:$PATH"' >> ~/.bashrc
-                    source ~/.bashrc
-
-                    dotnet tool list -g
+                    export DOTNET_ROOT=/var/lib/jenkins/.dotnet
+                    export PATH=$DOTNET_ROOT/tools:$PATH
                     dotnet tool install --global dotnet-ef
-                    dotnet tool update --global dotnet-ef
+
+                    ls /var/lib/jenkins/.dotnet/tools
+                    dotnet ef --version
                     dotnet ef database update --connection '${DB_CONNECTION_STRING}
                     """
                 }
