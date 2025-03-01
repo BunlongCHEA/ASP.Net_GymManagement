@@ -51,6 +51,7 @@ pipeline{
             steps {
                 script {
                     sh """
+                    dotnet tool install --global dotnet-ef
                     dotnet --info
                     dotnet-ef --version
                     pwd
