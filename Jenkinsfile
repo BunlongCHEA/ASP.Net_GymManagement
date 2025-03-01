@@ -15,6 +15,7 @@ pipeline{
         SQL_PASSWORD = 't01UA<2%7~v45'
         DB_CONNECTION_STRING = 'Server=db;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v45;TrustServerCertificate=True;'
         DOTNET_ROOT = "/usr/lib/dotnet"
+        PATH = "/usr/lib/dotnet:/usr/lib/dotnet/tools:/var/lib/jenkins/.dotnet/tools:$PATH"
         PROJECT_PATH = '/var/lib/jenkins/workspace/ASP DotNet Core/Gym/Gym_ManagementSystem'
     }
     stages{        
