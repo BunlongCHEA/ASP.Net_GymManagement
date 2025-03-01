@@ -37,6 +37,22 @@ pipeline{
                 }
             }
         }
+
+        stage("Apply Database Migrations") {
+            steps {
+                script {
+                    sh "dotnet ef database update --connection '${DB_CONNECTION_STRING}'"
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    sh 'dotnet test --configuration Release'
+                }
+            }
+        }
     }
     post{
         always{
