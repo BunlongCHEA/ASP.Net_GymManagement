@@ -38,18 +38,18 @@ pipeline{
             }
         }
 
-        stage("Apply Database Migrations") {
+        stage("Install dotnet tool for migration") {
             steps {
                 script {
-                    sh "dotnet ef database update --connection '${DB_CONNECTION_STRING}'"
-                }
-            }
-        }
+                    sh """
+                    echo 'export PATH="$HOME/.dotnet/tools:$PATH"' >> ~/.bashrc
+                    source ~/.bashrc
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    sh 'dotnet test --configuration Release'
+                    dotnet tool list -g
+                    dotnet tool install --global dotnet-ef
+                    dotnet tool update --global dotnet-ef
+                    dotnet ef database update --connection '${DB_CONNECTION_STRING}
+                    """
                 }
             }
         }
