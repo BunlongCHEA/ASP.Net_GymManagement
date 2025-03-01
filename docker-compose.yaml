@@ -25,6 +25,8 @@ services:
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Developer"
       MSSQL_ENABLE_HADR: "0"  # Disable high availability features
+      MSSQL_TCP_PORT: "1433"
+      MSSQL_TCP_ENABLED: "true"
     ports:
       - "1433:1433"
     restart: always

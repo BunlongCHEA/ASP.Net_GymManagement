@@ -15,7 +15,6 @@ pipeline{
         SQL_PASSWORD = 't01UA<2%7~v45'
         DB_CONNECTION_STRING = 'Server=db;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v45;TrustServerCertificate=True;'
         DOTNET_ROOT = "/usr/lib/dotnet"
-        PATH = "/usr/lib/dotnet:/usr/lib/dotnet/tools:/var/lib/jenkins/.dotnet/tools:$PATH"
         PROJECT_PATH = '/var/lib/jenkins/workspace/ASP DotNet Core/Gym/Gym_ManagementSystem'
     }
     stages{        
@@ -30,7 +29,7 @@ pipeline{
                     sed -i 's|Server=db;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v4;TrustServerCertificate=True;|${DB_CONNECTION_STRING}|g' ${DOCKER_COMPOSE_FILE}
 
                     pwd
-                    
+
                     sed -i 's|Server=localhost;Database=GymManagementSystem;User Id=sa;Password=12345;TrustServerCertificate=True;Integrated security=False;MultipleActiveResultSets=true;Encrypt=False;|${DB_CONNECTION_STRING}|g' "${APPSETTING_FILE}"
 
                     echo '***After config ${DOCKER_COMPOSE_FILE}...'
@@ -48,16 +47,14 @@ pipeline{
             }
         }
 
-        stage("Install dotnet tool for migration") {
+        stage("Check dotnet tool") {
             steps {
                 script {
                     sh """
-                    export DOTNET_ROOT=/usr/lib/dotnet
-                    export PATH=/usr/lib/dotnet:/usr/lib/dotnet/tools:/var/lib/jenkins/.dotnet/tools:\$PATH
-
                     dotnet --info
                     dotnet-ef --version
                     pwd
+                    dotnet ef database update --project '${PROJECT_PATH}' --connection 'Server=db,1433;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v45;TrustServerCertificate=True;'
                     """
                 }
             }
