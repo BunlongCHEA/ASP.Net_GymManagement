@@ -51,7 +51,7 @@ pipeline{
                     dotnet --info
                     dotnet-ef --version
                     pwd
-                    dotnet ef database update --project '${PROJECT_PATH}'
+                    dotnet ef database update --project '${PROJECT_PATH}' --connection '${DB_CONNECTION_STRING}'
                     """
                 }
             }
