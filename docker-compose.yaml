@@ -21,8 +21,10 @@ services:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver
     environment:
-      SA_PASSWORD: "t01UA<2%7~v4"
+      MSSQL_SA_PASSWORD: "t01UA<2%7~v4"
       ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      MSSQL_ENABLE_HADR: "0"  # Disable high availability features
     ports:
       - "1433:1433"
     restart: always

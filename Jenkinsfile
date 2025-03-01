@@ -19,8 +19,11 @@ pipeline{
             steps {
                 script {
                     sh """
+                    echo '***Before config ${DOCKER_COMPOSE_FILE}...'
+                    cat ${DOCKER_COMPOSE_FILE}
                     sed -i 's|t01UA<2%7~v4|${SQL_PASSWORD}|g' ${DOCKER_COMPOSE_FILE}
                     sed -i 's|Server=db;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v4;TrustServerCertificate=True;|${DB_CONNECTION_STRING}|g' ${DOCKER_COMPOSE_FILE}
+                    echo '***After config ${DOCKER_COMPOSE_FILE}...'
                     cat ${DOCKER_COMPOSE_FILE}
                     """
                 }
