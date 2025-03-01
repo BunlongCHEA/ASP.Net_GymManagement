@@ -33,14 +33,6 @@ pipeline{
                 }
             }
         }
-
-        stage("Apply Database Migrations") {
-            steps {
-                script {
-                    sh 'dotnet ef database update'
-                }
-            }
-        }
     }
     post{
         always{
