@@ -42,8 +42,6 @@ pipeline{
             steps {
                 script {
                     sh """
-                    export DOTNET_ROOT=/var/lib/jenkins/.dotnet
-                    export PATH=$DOTNET_ROOT/tools:$PATH
                     dotnet tool install --global dotnet-ef
 
                     ls /var/lib/jenkins/.dotnet/tools
