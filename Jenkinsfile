@@ -49,7 +49,7 @@ pipeline{
 
                     dotnet --info
                     dotnet-ef --version
-                    dotnet ef database update
+                    pwd
                     """
                 }
             }
