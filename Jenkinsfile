@@ -13,6 +13,8 @@ pipeline{
         DOCKER_COMPOSE_FILE = 'docker-compose.yaml'
         SQL_PASSWORD = 't01UA<2%7~v45'
         DB_CONNECTION_STRING = 'Server=db;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v45;TrustServerCertificate=True;'
+        DOTNET_ROOT = "/var/lib/jenkins/.dotnet"
+        PATH = "/var/lib/jenkins/.dotnet/tools:$PATH"
     }
     stages{        
         stage('Modify Docker-Compose for Database Credential') {
@@ -42,10 +44,10 @@ pipeline{
             steps {
                 script {
                     sh """
-                    dotnet tool install --global dotnet-ef
+                    export PATH=/var/lib/jenkins/.dotnet/tools:\$PATH
+                    dotnet-ef --version
 
                     ls /var/lib/jenkins/.dotnet/tools
-                    dotnet ef --version
                     dotnet ef database update --connection '${DB_CONNECTION_STRING}
                     """
                 }
