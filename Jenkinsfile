@@ -51,7 +51,7 @@ pipeline{
                     dotnet --info
                     dotnet-ef --version
                     pwd
-                    dotnet ef database update --project '${PROJECT_PATH}' --connection '${DB_CONNECTION_STRING}'
+                    dotnet ef database update --project '${PROJECT_PATH}' --connection "Server=db,1433;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v45;TrustServerCertificate=True;"
                     """
                 }
             }
