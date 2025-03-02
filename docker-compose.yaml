@@ -26,15 +26,11 @@ services:
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Developer"
       MSSQL_TCP_PORT: "1433"
-      MSSQL_DATA_DIR: /var/opt/mssql/data
     ports:
       - "1433:1433"
     restart: always
     volumes:
-      # - sqlserver_data:/var/opt/mssql
-      - /etc/mssql22/data:/var/opt/mssql/data
-      - /etc/mssql22/log:/var/opt/mssql/log
-      - /etc/mssql22/secrets:/var/opt/mssql/secrets
+      - sqlserver22_data:/var/opt/mssql
     networks:
       - dotnet_gym
 
@@ -52,8 +48,8 @@ services:
     networks:
       - dotnet_gym
 
-# volumes:
-#   sqlserver_data:
+volumes:
+  sqlserver22_data:
 
 networks:
   dotnet_gym:
