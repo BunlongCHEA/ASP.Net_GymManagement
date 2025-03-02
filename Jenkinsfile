@@ -74,17 +74,17 @@ pipeline{
            script {
                 sh """
                 curl -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-                -d "chat_id"="${TELEGRAM_CHAT_ID}" \
-                -d parse_mode="HTML" \
-                -d disable_web_page_preview=true \
-                -d text="
-                🔔 <b>*Jenkins Build Notification*</b> 🔔
-                %0A📚<b>Stage</b>: Deploy ${PROJECT_NAME} \
-                %0A🟢<b>Status:</b> ${currentBuild.result} \
-                %0A🔢<b>Version:</b> ${params.APP_ENV}-${BUILD_NUMBER} \
-                %0A📌<b>Environment:</b> ${params.APP_ENV} \
-                %0A🔗<b>Application URL:</b> ${APP_URL} \
-                %0A👤<b>User Build:</b> ${BUILD_USER} \
+                        -d "chat_id"="${TELEGRAM_CHAT_ID}" \
+                        -d parse_mode="HTML" \
+                        -d disable_web_page_preview=true \
+                        -d text="
+                        🔔 <b>*Jenkins Build Notification*</b> 🔔
+                        %0A📚<b>Stage</b>: Deploy ${PROJECT_NAME} \
+                        %0A🟢<b>Status:</b> ${currentBuild.result} \
+                        %0A🔢<b>Version:</b> ${params.APP_ENV}-${BUILD_NUMBER} \
+                        %0A📌<b>Environment:</b> ${params.APP_ENV} \
+                        %0A🔗<b>Application URL:</b> ${APP_URL} \
+                        %0A👤<b>User Build:</b> ${BUILD_USER}"
                 """
            }
         }
