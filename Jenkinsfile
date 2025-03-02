@@ -2,6 +2,7 @@ pipeline{
     agent any
     parameters {
         string(name: 'BRANCH', defaultValue: 'main', description: 'Branch to build from')
+        choice(name: 'APP_ENV', choices: ['Production', 'Development', 'Staging'], description: 'Select the deployment environment')
         booleanParam(name: 'USE_HTTPS', defaultValue: false, description: 'Run on HTTPS (Requires Certificate)')
         string(name: 'CERTIFICATE_PATH', defaultValue: '', description: 'Pass Only Path to SSL Certificate (Required if HTTPS is enabled)')
         string(name: 'CERTIFICATE_NAME', defaultValue: '', description: 'SSL Certificate Name (Required if HTTPS is enabled)')
@@ -9,6 +10,7 @@ pipeline{
     }
     environment {
         PROJECT_NAME = 'Gym_ManagementSystem'
+        APP_URL= 'http://146.190.111.215:80/'
         NGINX_CONTAINER = 'nginx_proxy'
         DOCKER_COMPOSE_FILE = 'docker-compose.yaml'
         APPSETTING_FILE = './Gym_ManagementSystem/appsettings.json'
@@ -17,6 +19,9 @@ pipeline{
         DOTNET_ROOT = "/usr/lib/dotnet"
         PATH = "/usr/lib/dotnet:/usr/lib/dotnet/tools:/var/lib/jenkins/.dotnet/tools:$PATH"
         PROJECT_PATH = '/var/lib/jenkins/workspace/ASP DotNet Core/Gym/Gym_ManagementSystem'
+
+        TELEGRAM_BOT_TOKEN = '8119780035:AAHYYPcMj_5xdWVA5iD14Nh-4VzWfgEhDFw'
+        TELEGRAM_CHAT_ID = '4782031397'
     }
     stages{        
         stage('Modify Docker-Compose for Database Credential') {
@@ -66,13 +71,22 @@ pipeline{
     }
     post{
         always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
+           script {
+                sh """
+                curl -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+                -d "chat_id"="${TELEGRAM_CHAT_ID}" \
+                -d parse_mode="HTML" \
+                -d disable_web_page_preview=true \
+                -d text="
+                🔔 <b>*Jenkins Build Notification*</b> 🔔
+                %0A📚<b>Stage</b>: Deploy ${PROJECT_NAME} \
+                %0A🟢<b>Status:</b> ${currentBuild.result} \
+                %0A🔢<b>Version:</b> ${params.APP_ENV}-${BUILD_NUMBER} \
+                %0A📌<b>Environment:</b> ${params.APP_ENV} \
+                %0A🔗<b>Application URL:</b> ${APP_URL} \
+                %0A👤<b>User Build:</b> ${BUILD_USER} \
+                """
+           }
         }
     }
 }
