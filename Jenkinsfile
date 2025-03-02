@@ -13,7 +13,7 @@ pipeline{
         DOCKER_COMPOSE_FILE = 'docker-compose.yaml'
         APPSETTING_FILE = './Gym_ManagementSystem/appsettings.json'
         SQL_PASSWORD = 't01UA<2%7~v45'
-        DB_CONNECTION_STRING = 'Server=sqlserver22;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v45;TrustServerCertificate=True;'
+        DB_CONNECTION_STRING = 'Server=sqlserver22,1433;Database=GymManagementSystem;User Id=sa;Password=t01UA<2%7~v45;TrustServerCertificate=True;'
         DOTNET_ROOT = "/usr/lib/dotnet"
         PATH = "/usr/lib/dotnet:/usr/lib/dotnet/tools:/var/lib/jenkins/.dotnet/tools:$PATH"
         PROJECT_PATH = '/var/lib/jenkins/workspace/ASP DotNet Core/Gym/Gym_ManagementSystem'
@@ -35,6 +35,9 @@ pipeline{
 
                     echo '***After config ${DOCKER_COMPOSE_FILE}...'
                     cat ${DOCKER_COMPOSE_FILE}
+
+                    echo '***Check config ${APPSETTING_FILE}...'
+                    cat ${APPSETTING_FILE}
                     """
                 }
             }
