@@ -56,5 +56,5 @@ services:
 #   sqlserver_data:
 
 networks:
-  dotnetgym:
+  dotnet_gym:
     driver: bridge
