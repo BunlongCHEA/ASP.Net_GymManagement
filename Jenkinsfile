@@ -20,8 +20,8 @@ pipeline{
         PATH = "/usr/lib/dotnet:/usr/lib/dotnet/tools:/var/lib/jenkins/.dotnet/tools:$PATH"
         PROJECT_PATH = '/var/lib/jenkins/workspace/ASP DotNet Core/Gym/Gym_ManagementSystem'
 
-        TELEGRAM_BOT_TOKEN = '8119780035:AAHYYPcMj_5xdWVA5iD14Nh-4VzWfgEhDFw'
-        TELEGRAM_CHAT_ID = '-4674725761'
+        TELEGRAM_BOT_TOKEN = '[TELEGRAM HTTP API]'
+        TELEGRAM_CHAT_ID = '-4674*****61'
     }
     stages{        
         stage('Modify Docker-Compose for Database Credential') {
